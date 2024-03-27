@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { SALT, JWT_SECRET } from "../config/serverConfig.js";
+import Account from "./Account.js";
 
 const userSchema = new Schema(
   {
@@ -25,6 +26,14 @@ userSchema.pre("save", function (next) {
   const encryptedPassword = bcrypt.hashSync(user.password, SALT);
   user.password = encryptedPassword;
   next();
+});
+
+userSchema.post("save", async function (doc) {
+  // this is just for simplicity
+  await Account.create({
+    user: doc._id,
+    balance: Math.round(Math.random() * 1000000),
+  });
 });
 
 userSchema.methods.genJWT = function generate() {
