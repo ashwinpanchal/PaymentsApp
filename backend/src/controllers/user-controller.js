@@ -13,7 +13,7 @@ const signup = async (req, res) => {
     });
     const token = response.genJWT();
     return res.status(201).json({
-      data: token,
+      data: { token },
       success: true,
       message: "Successfully sign up",
       err: {},
@@ -33,7 +33,7 @@ const login = async (req, res) => {
     const { username, password } = req.body;
     const token = await userService.login({ username, password });
     return res.json({
-      data: token,
+      data: { token },
       success: true,
       message: "Successfully log in",
       err: {},

@@ -8,6 +8,16 @@ class UserService {
     this.userRepository = new UserRepository();
   }
 
+  async getById(id) {
+    try {
+      const user = await this.userRepository.getById(id);
+      return user;
+    } catch (error) {
+      console.log("Something went wrong at the service level");
+      throw error;
+    }
+  }
+
   async signup(data) {
     try {
       const response = await this.userRepository.create(data);

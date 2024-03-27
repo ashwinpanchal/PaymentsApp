@@ -34,7 +34,6 @@ userSchema.methods.genJWT = function generate() {
 };
 
 userSchema.methods.comparePassword = function compare(password) {
-  console.log("HEllo");
   return bcrypt.compareSync(password, this.password);
 };
 
