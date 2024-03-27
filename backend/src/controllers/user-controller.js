@@ -73,7 +73,10 @@ const updateRequest = async (req, res) => {
 
 const getBulk = async (req, res) => {
   try {
-    const { filter } = req.query;
+    let { filter } = req.query;
+    if (!filter) {
+      filter = "";
+    }
     const response = await userService.getBulk(filter);
     return res.json({
       data: response,
