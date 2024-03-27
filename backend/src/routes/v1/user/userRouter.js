@@ -7,5 +7,6 @@ const userRouter = Router();
 
 userRouter.post("/signup", UserController.signup);
 userRouter.post("/login", UserController.login);
+userRouter.put("/", authenticate, UserController.updateRequest);
 
 export { userRouter };

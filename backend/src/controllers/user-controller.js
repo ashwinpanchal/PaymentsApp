@@ -48,6 +48,29 @@ const login = async (req, res) => {
   }
 };
 
-const UserController = { signup, login };
+const updateRequest = async (req, res) => {
+  try {
+    const { firstName, lastName, password } = req.body;
+    await userService.updateUser(req.userId, {
+      firstName,
+      lastName,
+      password,
+    });
+    return res.json({
+      success: true,
+      message: "Successfully updated the user information",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Something went wrong",
+      err: { message: error.message, error: error },
+    });
+  }
+};
+
+const UserController = { signup, login, updateRequest };
 
 export default UserController;

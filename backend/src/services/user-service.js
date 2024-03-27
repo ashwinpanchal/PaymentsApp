@@ -1,7 +1,7 @@
 import { UserRepository } from "../repository/index.js";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config/serverConfig.js";
-import { compareSync } from "bcrypt";
+import { JWT_SECRET, SALT } from "../config/serverConfig.js";
+import { hashSync } from "bcrypt";
 
 class UserService {
   constructor() {
@@ -51,6 +51,27 @@ class UserService {
       }
       const token = user.genJWT();
       return token;
+    } catch (error) {
+      console.log("Something went wrong at the service level");
+      throw error;
+    }
+  }
+
+  async updateUser(id, data) {
+    try {
+      let dataForUpdate = {};
+      if (data.firstName) {
+        dataForUpdate.firstName = data.firstName;
+      }
+      if (data.lastName) {
+        dataForUpdate.lastName = data.lastName;
+      }
+      if (data.password) {
+        const encryptedPassword = hashSync(data.password, SALT);
+        dataForUpdate.password = encryptedPassword;
+      }
+      const response = await this.userRepository.update(id, dataForUpdate);
+      return response;
     } catch (error) {
       console.log("Something went wrong at the service level");
       throw error;
