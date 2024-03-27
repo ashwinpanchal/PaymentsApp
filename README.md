@@ -11,6 +11,8 @@
 ```
 PORT=3000
 mongoDbUrl=YOUR_MONGO_CONNECTION_STRING
+saltRounds=9 (Recommended)
+JWT_SECRET=JSON_WEB_TOKEN_SECRET_STRING
 ```
 
 - To start the backend server, run the command `npm start`

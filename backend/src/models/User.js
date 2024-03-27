@@ -28,12 +28,13 @@ userSchema.pre("save", function (next) {
 });
 
 userSchema.methods.genJWT = function generate() {
-  return jwt.sign({ id: this._id, username: this.username }, JWT_SECRET, {
+  return jwt.sign({ id: this._id }, JWT_SECRET, {
     expiresIn: "1h",
   });
 };
 
 userSchema.methods.comparePassword = function compare(password) {
+  console.log("HEllo");
   return bcrypt.compareSync(password, this.password);
 };
 
