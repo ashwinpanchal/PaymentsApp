@@ -15,6 +15,20 @@ class AccountService {
       throw error;
     }
   }
+
+  async transaction(userId, toUser, amount) {
+    try {
+      const response = await this.accountRepository.transaction(
+        userId,
+        toUser,
+        amount
+      );
+      return response;
+    } catch (error) {
+      console.log("Something went wrong at the service layer");
+      throw error;
+    }
+  }
 }
 
 export default AccountService;
