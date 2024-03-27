@@ -15,6 +15,21 @@ class UserRepository extends CrudRepository {
       throw error;
     }
   }
+
+  async getBulk(filter) {
+    try {
+      const response = await User.find({
+        $or: [
+          { firstName: { $regex: filter, $options: "i" } },
+          { lastName: { $regex: filter, $options: "i" } },
+        ],
+      }).select("firstName lastName _id");
+      return response;
+    } catch (error) {
+      console.log("Something went wrong at the repository layer");
+      throw error;
+    }
+  }
 }
 
 export default UserRepository;

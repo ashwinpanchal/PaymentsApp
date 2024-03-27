@@ -77,6 +77,16 @@ class UserService {
       throw error;
     }
   }
+
+  async getBulk(filter) {
+    try {
+      const response = await this.userRepository.getBulk(filter);
+      return response;
+    } catch (error) {
+      console.log("Something went wrong at the service level");
+      throw error;
+    }
+  }
 }
 
 export default UserService;

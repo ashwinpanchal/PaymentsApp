@@ -71,6 +71,26 @@ const updateRequest = async (req, res) => {
   }
 };
 
-const UserController = { signup, login, updateRequest };
+const getBulk = async (req, res) => {
+  try {
+    const { filter } = req.query;
+    const response = await userService.getBulk(filter);
+    return res.json({
+      data: response,
+      success: true,
+      message: "Successfully fetched",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Something went wrong",
+      err: { message: error.message, error: error },
+    });
+  }
+};
+
+const UserController = { signup, login, updateRequest, getBulk };
 
 export default UserController;
