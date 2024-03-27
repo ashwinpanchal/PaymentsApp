@@ -10,4 +10,4 @@ userRouter.post("/login", UserController.login);
 userRouter.put("/", authenticate, UserController.updateRequest);
 userRouter.get("/bulk", authenticate, UserController.getBulk);
 
-export { userRouter };
+export default userRouter;
