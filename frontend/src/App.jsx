@@ -1,5 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./components/Home";
+import { Signup } from "./components/SIgnup";
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
