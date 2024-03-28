@@ -5,7 +5,7 @@ export function Appbar() {
   return (
     <div className="w-full h-12 bg-blue-500 flex justify-between">
       <div className="flex flex-col justify-center">
-        <div className="ml-5 text-gray-50 text-xl font-bond">Payment</div>
+        <div className="ml-5 text-gray-50 text-xl font-extrabold">Payment</div>
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-between">

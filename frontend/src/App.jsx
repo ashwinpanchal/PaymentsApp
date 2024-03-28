@@ -1,20 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./components/Home";
 import { Signup } from "./components/Signup";
 import { Login } from "./components/Login";
 import { Appbar } from "./components/Appbar";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Appbar />
-        <Routes>
-          <Route path="/" element={<Signup />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <RecoilRoot>
+        <BrowserRouter>
+          <Appbar />
+          <Routes>
+            <Route path="/" element={<Signup />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </RecoilRoot>
     </>
   );
 }
