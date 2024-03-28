@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import { InputField } from "./InputField";
 
 import {
@@ -8,6 +8,8 @@ import {
   signupAtomLastname,
   signupAtomPassword,
 } from "../store/atoms/SignupAtoms";
+import { useRecoilState } from "recoil";
+// import { signUpSelector } from "../store/selectors/selector";
 
 export function Signup() {
   const navigate = useNavigate();
@@ -17,7 +19,11 @@ export function Signup() {
       <InputField placeholder={"Username"} atom={signupAtomUsername} />
       <InputField placeholder={"First name"} atom={signupAtomFirstname} />
       <InputField placeholder={"Last name"} atom={signupAtomLastname} />
-      <InputField placeholder={"Password"} atom={signupAtomPassword} />
+      <InputField
+        placeholder={"Password"}
+        atom={signupAtomPassword}
+        type="password"
+      />
       <SingupButton text={"Signup"} />
       <div className="text-sm text-center mt-3 text-gray-500 mb-10">
         Already have an accout?{" "}
@@ -33,8 +39,29 @@ export function Signup() {
 }
 
 function SingupButton({ text }) {
+  const navigate1 = useNavigate();
+  const [username, setUsername] = useRecoilState(signupAtomUsername);
+  const [firstName, setFirstName] = useRecoilState(signupAtomFirstname);
+  const [lastName, setLastName] = useRecoilState(signupAtomLastname);
+  const [password, setPassword] = useRecoilState(signupAtomPassword);
+  // const signUpBody = useRecoilValue(signUpSelector);
   return (
-    <button className="bg-blue-600 hover:bg-blue-500 text-gray-50 p-2 rounded-lg ml-10 mr-10 mt-5">
+    <button
+      onClick={async () => {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/user/signup",
+          { username, firstName, lastName, password }
+        );
+        const token = res.data.data.token;
+        localStorage.setItem("token", token);
+        setFirstName("");
+        setLastName("");
+        setUsername("");
+        setPassword("");
+        navigate1("/dashboard");
+      }}
+      className="bg-blue-600 hover:bg-blue-500 text-gray-50 p-2 rounded-lg ml-10 mr-10 mt-5"
+    >
       {text}
     </button>
   );

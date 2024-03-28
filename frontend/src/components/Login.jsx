@@ -13,7 +13,11 @@ export function Login() {
     <div className="flex flex-col mt-20 rounded-lg shadow-lg max-w-xl lg:w-1/2 sm:w-2/3 w-4/5 m-auto">
       <div className="text-center text-3xl font-bold mt-10 mb-5">Login</div>
       <InputField placeholder={"Username"} atom={loginAtomUsername} />
-      <InputField placeholder={"Password"} atom={loginAtomPassword} />
+      <InputField
+        placeholder={"Password"}
+        atom={loginAtomPassword}
+        type="password"
+      />
       <LoginButton text={"Login"} />
       <div className="text-sm text-center mt-3 text-gray-500 mb-10">
         Don't have an accout?{" "}
