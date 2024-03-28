@@ -6,7 +6,8 @@ import {
   loginAtomUsername,
   loginAtomPassword,
 } from "../store/atoms/LoginAtoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { signedInAtom } from "../store/atoms/Atoms";
 
 export function Login() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ function LoginButton({ text }) {
   const navigate1 = useNavigate();
   const [username, setUsername] = useRecoilState(loginAtomUsername);
   const [password, setPassword] = useRecoilState(loginAtomPassword);
+  const setSignedIn = useSetRecoilState(signedInAtom);
   return (
     <button
       onClick={async () => {
@@ -48,6 +50,7 @@ function LoginButton({ text }) {
         localStorage.setItem("token", token);
         setUsername("");
         setPassword("");
+        setSignedIn(true);
         navigate1("/dashboard");
       }}
       className="bg-blue-600 hover:bg-blue-500 text-gray-50 p-2 rounded-lg ml-10 mr-10 mt-5"

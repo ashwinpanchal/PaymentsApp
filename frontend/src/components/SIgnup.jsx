@@ -8,8 +8,10 @@ import {
   signupAtomLastname,
   signupAtomPassword,
 } from "../store/atoms/SignupAtoms";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 // import { signUpSelector } from "../store/selectors/selector";
+
+import { signedInAtom } from "../store/atoms/Atoms";
 
 export function Signup() {
   const navigate = useNavigate();
@@ -44,6 +46,7 @@ function SingupButton({ text }) {
   const [firstName, setFirstName] = useRecoilState(signupAtomFirstname);
   const [lastName, setLastName] = useRecoilState(signupAtomLastname);
   const [password, setPassword] = useRecoilState(signupAtomPassword);
+  const setSignedIn = useSetRecoilState(signedInAtom);
   // const signUpBody = useRecoilValue(signUpSelector);
   return (
     <button
@@ -58,6 +61,7 @@ function SingupButton({ text }) {
         setLastName("");
         setUsername("");
         setPassword("");
+        setSignedIn(true);
         navigate1("/dashboard");
       }}
       className="bg-blue-600 hover:bg-blue-500 text-gray-50 p-2 rounded-lg ml-10 mr-10 mt-5"
