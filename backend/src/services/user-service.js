@@ -87,6 +87,16 @@ class UserService {
       throw error;
     }
   }
+
+  async me(userId) {
+    try {
+      const user = await this.userRepository.getById(userId);
+      return { firstName: user.firstName, lastName: user.lastName };
+    } catch (error) {
+      console.log("Something went wrong at the service level");
+      throw error;
+    }
+  }
 }
 
 export default UserService;

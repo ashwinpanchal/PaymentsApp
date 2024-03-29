@@ -77,7 +77,8 @@ const getBulk = async (req, res) => {
     if (!filter) {
       filter = "";
     }
-    const response = await userService.getBulk(filter);
+    let response = await userService.getBulk(filter);
+    response = response.filter((value) => value._id != req.userId);
     return res.json({
       data: response,
       success: true,
@@ -94,6 +95,23 @@ const getBulk = async (req, res) => {
   }
 };
 
-const UserController = { signup, login, updateRequest, getBulk };
+const me = async (req, res) => {
+  try {
+    const response = await userService.me(req.userId);
+    return res.json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Something went wrong",
+      err: { message: error.message, error: error },
+    });
+  }
+};
+
+const UserController = { signup, login, updateRequest, getBulk, me };
 
 export default UserController;
