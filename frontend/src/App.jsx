@@ -27,7 +27,6 @@ function Main() {
     axios
       .get("http://localhost:3000/api/v1/user/me", { headers: headers })
       .then((value) => {
-        console.log(value.data);
         setSignedIn(true);
       })
       .catch((err) => {

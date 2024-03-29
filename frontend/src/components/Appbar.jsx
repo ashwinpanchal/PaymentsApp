@@ -37,20 +37,23 @@ function SignedOut() {
 }
 
 function SignedIn() {
+  const name = "Oppo";
   const navigate1 = useNavigate();
   const setSignedIn = useSetRecoilState(signedInAtom);
   return (
     <div className="flex flex-col justify-center">
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">
-          <div className="text-gray-50 text-md font-semibold">Hello</div>
-        </div>
-        <div className="flex flex-col justify-center">
-          <div className="flex justify-center rounded-full bg-blue-200 ml-3 mr-5 text-gray-600 w-7 h-7">
-            <div className="flex flex-col justify-center">U</div>
+          <div className="text-gray-50 text-md font-semibold">
+            {"Hello " + name}
           </div>
         </div>
-        <div>
+        <div className="flex flex-col justify-center">
+          <div className="flex justify-center rounded-full bg-blue-200 ml-3 mr-5 text-gray-600 w-9 h-9">
+            <div className="flex flex-col justify-center">{name[0]}</div>
+          </div>
+        </div>
+        <div className="flex flex-col justify-center">
           <button
             className="bg-gray-50 hover:bg-gray-100 rounded mr-5 p-1 pl-2 pr-2"
             onClick={() => {

@@ -1,4 +1,12 @@
-export function Balance({ balance }) {
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { balanceAtom } from "../store/atoms/Atoms";
+
+export function Balance() {
+  const bal = useRecoilValueLoadable(balanceAtom);
+  let balance = "Loading...";
+  if (bal.state === "hasValue") {
+    balance = bal.contents;
+  }
   return (
     <div className="w-full flex justify-left">
       <div className="text-md font-bold text-gray-600">

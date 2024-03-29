@@ -9,7 +9,7 @@ export function Dashboard() {
     <>
       {signedIn ? (
         <div className="p-10">
-          <Balance balance={34.34} />
+          <Balance />
           <UserComponent />
         </div>
       ) : null}

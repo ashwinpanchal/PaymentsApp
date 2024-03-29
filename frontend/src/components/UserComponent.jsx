@@ -1,13 +1,43 @@
+import { useEffect, useState } from "react";
 import { searchUserAtom } from "../store/atoms/Atoms";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import axios from "axios";
 
 export function UserComponent() {
   return (
     <div className="w-full flex-col justify-left mt-6">
       <div className="text-lg font-bold text-gray-900">Users</div>
       <InputFieldUsers placeholder={"Search users..."} atom={searchUserAtom} />
-      <User name={"Kohli"} />
-      <User name={"Dhoni"} />
+      {/* <User name={"Kohli"} />
+      <User name={"Dhoni"} /> */}
+      <UsersList />
+    </div>
+  );
+}
+
+export function UsersList() {
+  const [userList, setUserList] = useState([]);
+  const searchUser = useRecoilValue(searchUserAtom);
+  const url = "http://localhost:3000/api/v1/user/bulk?filter=" + searchUser;
+  useEffect(() => {
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((value) => {
+        setUserList(value.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, [searchUser]);
+  return (
+    <div>
+      {userList.map((value) => {
+        return (
+          <User key={value._id} name={value.firstName + " " + value.lastName} />
+        );
+      })}
     </div>
   );
 }
